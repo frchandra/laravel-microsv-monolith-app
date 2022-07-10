@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc2a2308e21c1d6bba8061540c162b77",
+    "content-hash": "7304e4998e5033ea70af75bad03bb671",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -178,6 +178,46 @@
                 "source": "https://github.com/cartalyst/stripe/tree/v2.4.6"
             },
             "time": "2021-10-09T10:40:49+00:00"
+        },
+        {
+            "name": "chandra/laravel-kafka-dependency",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/frchandra/laravel-kafka-dependency.git",
+                "reference": "302dd78868bc7712f639fc80dfa3a8c266db573f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/frchandra/laravel-kafka-dependency/zipball/302dd78868bc7712f639fc80dfa3a8c266db573f",
+                "reference": "302dd78868bc7712f639fc80dfa3a8c266db573f",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=8.10"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chandra\\LaravelKafkaDependency\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "frchandra",
+                    "email": "nismara.chandra@gmail.com"
+                }
+            ],
+            "description": "Package for confluent kafka and laravel framework integration",
+            "support": {
+                "source": "https://github.com/frchandra/laravel-kafka-dependency/tree/main",
+                "issues": "https://github.com/frchandra/laravel-kafka-dependency/issues"
+            },
+            "time": "2022-07-10T18:45:12+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -2747,16 +2787,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.5",
+            "version": "v0.11.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "c23686f9c48ca202710dbb967df8385a952a2daf"
+                "reference": "77fc7270031fbc28f9a7bea31385da5c4855cb7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/c23686f9c48ca202710dbb967df8385a952a2daf",
-                "reference": "c23686f9c48ca202710dbb967df8385a952a2daf",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/77fc7270031fbc28f9a7bea31385da5c4855cb7a",
+                "reference": "77fc7270031fbc28f9a7bea31385da5c4855cb7a",
                 "shasum": ""
             },
             "require": {
@@ -2817,9 +2857,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.5"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.7"
             },
-            "time": "2022-05-27T18:03:49+00:00"
+            "time": "2022-07-07T13:49:11+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -8694,7 +8734,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "chandra/laravel-kafka-dependency": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
