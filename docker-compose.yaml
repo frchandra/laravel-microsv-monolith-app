@@ -1,27 +1,62 @@
 version: '3.9'
+
+volumes:
+  lvr-ambsdr-be:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/chandra/CodeBase/Laravel/micro-service/laravel-ambassador/ #change me (needs full path)
+      o: bind
+
+  lvr-ambsdr-db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/chandra/CodeBase/Laravel/micro-service/laravel-ambassador/storage/dbdata #change me (needs full path)
+      o: bind
+
+  mailhog-maildir:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/chandra/Instalasi/mailhog/maildir #change me (needs full path)
+      o: bind
+
+
 services:
   backend:
     build: .
     ports:
       - 8000:8000
     volumes:
-      - .:/app
+      - lvr-ambsdr-be:/app:Z
+    command: 'php artisan serve --host=0.0.0.0'
     depends_on:
       - db
 
   db:
-    image: mysql:8
+    image: mysql:8.0.28
     restart: always
     environment:
       MYSQL_DATABASE: ambassador
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
     volumes:
-      - ./storage/dbdata:/var/lib/mysql
+      - lvr-ambsdr-db:/var/lib/mysql:Z
     ports:
       - 33066:3306
 
   redis:
-    image: redis
+    image: redis:6
     ports:
       - 6379:6379
+
+  mailhog:
+    image: mailhog/mailhog
+    environment:
+      MH_STORAGE: maildir
+    volumes:
+      - mailhog-maildir:/maildir
+    ports:
+      - 1025:1025
+      - 8025:8025

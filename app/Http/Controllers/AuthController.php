@@ -86,6 +86,6 @@ class AuthController extends Controller
             'password' => \Hash::make($request->input('password'))
         ]);
 
-        return response($user, Response::HTTP_ACCEPTED);
+        return response($user, Response::HTTP_ACCEPTED); #####
     }
 }
