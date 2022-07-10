@@ -8,9 +8,10 @@ use function var_dump;
 
 class KafkaQueue extends Queue implements QueueContract{
 
-    protected $consumer;
+    protected $producer, $consumer;
 
-    public function __construct($consumer){
+    public function __construct($producer, $consumer){
+        $this->producer = $producer;
         $this->consumer = $consumer;
     }
 
@@ -19,7 +20,9 @@ class KafkaQueue extends Queue implements QueueContract{
     }
 
     public function push($job, $data = '', $queue = null){
-        // TODO: Implement push() method.
+        $topic = $this->producer->newTopic('default');
+        $topic->produce(RD_KAFKA_PARTITION_UA, 0, serialize($job));
+        $this->producer->flush(1000);
     }
 
     public function pushRaw($payload, $queue = null, array $options = []){

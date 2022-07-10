@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\OrderCompletedEvent;
 use App\Http\Resources\OrderResource;
+use App\Jobs\OrderCompleted;
 use App\Models\Link;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -13,13 +14,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         return OrderResource::collection(Order::with('orderItems')->get());
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         if (!$link = Link::where('code', $request->input('code'))->first()) {
             abort(400, 'Invalid code');
         }
@@ -93,8 +92,7 @@ class OrderController extends Controller
         }
     }
 
-    public function confirm(Request $request)
-    {
+    public function confirm(Request $request){
         if (!$order = Order::where('transaction_id', $request->input('source'))->first()) {
             return response([
                 'error' => 'Order not found!'
@@ -104,7 +102,10 @@ class OrderController extends Controller
         $order->complete = 1;
         $order->save();
 
-//        event(new OrderCompletedEvent($order));
+//        $array = $order->toArray();
+//        $array['ambassador_revenue'] = $order->ambassador_revenue;
+//        $array['admin_revenue'] = $order->admin_revenue;
+//        OrderCompleted::dispatch($array);
 
         return [
             'message' => 'success'

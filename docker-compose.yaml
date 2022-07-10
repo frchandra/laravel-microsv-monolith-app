@@ -15,12 +15,7 @@ volumes:
       device: /home/chandra/CodeBase/Laravel/micro-service/laravel-ambassador/storage/dbdata #change me (needs full path)
       o: bind
 
-  mailhog-maildir:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/chandra/Instalasi/mailhog/maildir #change me (needs full path)
-      o: bind
+
 
 
 services:
@@ -31,6 +26,8 @@ services:
     volumes:
       - lvr-ambsdr-be:/app:Z
     command: 'php artisan serve --host=0.0.0.0'
+    networks:
+      - lvr-microservices
     depends_on:
       - db
 
@@ -45,18 +42,18 @@ services:
       - lvr-ambsdr-db:/var/lib/mysql:Z
     ports:
       - 33066:3306
+    networks:
+      - lvr-microservices
 
   redis:
     image: redis:6
     ports:
       - 6379:6379
+    networks:
+      - lvr-microservices
 
-  mailhog:
-    image: mailhog/mailhog
-    environment:
-      MH_STORAGE: maildir
-    volumes:
-      - mailhog-maildir:/maildir
-    ports:
-      - 1025:1025
-      - 8025:8025
+
+
+networks:
+  lvr-microservices:
+
