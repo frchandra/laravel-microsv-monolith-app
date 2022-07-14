@@ -41,9 +41,8 @@ class LinkController extends Controller{
 
     public function show($code){
         $link = Link::with( 'products')->where('code', $code)->first();
-
-        $user = $this->userService->get();
-
-        return
+        $user = $this->userService->get("users/{$link->user_id}");
+        $link['user'] = $user;
+        return $link;
     }
 }
