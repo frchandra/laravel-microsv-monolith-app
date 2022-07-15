@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\UserService;
 use Closure;
 use Illuminate\Http\Request;
+use function abort;
 
 class ScopeAmbassadorMiddleware
 {
@@ -14,9 +16,9 @@ class ScopeAmbassadorMiddleware
      * @param \Closure $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
-    {
-        if (!$request->user()->tokenCan('ambassador')) {
+    public function handle(Request $request, Closure $next){
+        $response = (new UserService())->getRequest('get', 'scope/ambassador');
+        if (!$response->ok()){
             abort(401, 'unauthorized');
         }
 

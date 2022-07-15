@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereUserId($value)
  * @mixin \Eloquent
- * @property-read \App\Models\User $user
  */
 class Link extends Model
 {
