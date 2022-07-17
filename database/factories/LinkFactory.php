@@ -23,7 +23,7 @@ class LinkFactory extends Factory
     {
         return [
             'code' => $this->faker->slug,
-            'user_id' => rend(1, 30)
+            'user_id' => rand(1, 30)
         ];
     }
 }
