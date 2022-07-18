@@ -23,29 +23,29 @@ class LinkController extends Controller{
         return LinkResource::collection($links);
     }
 
-    public function store(Request $request){
-        $user = $this->userService->get('user');
-        $link = Link::create([
-            'user_id' => $user['id'],
-            'code' => Str::random(6)
-        ]);
-
-        $linkProducts = [];
-
-        foreach ($request->input('products') as $product_id) {
-            $linkProduct = LinkProduct::create([
-                'link_id' => $link->id,
-                'product_id' => $product_id
-            ]);
-            $linkProducts[] = $linkProduct->toArray();
-        }
-
-        $array = $link->toArray();
-        $array['link_product'] = $linkProducts;
-        LinkCreated::dispatch($array)->onQueue('checkout_topic');
-
-        return $link;
-    }
+//    public function store(Request $request){
+//        $user = $this->userService->get('user');
+//        $link = Link::create([
+//            'user_id' => $user['id'],
+//            'code' => Str::random(6)
+//        ]);
+//
+//        $linkProducts = [];
+//
+//        foreach ($request->input('products') as $product_id) {
+//            $linkProduct = LinkProduct::create([
+//                'link_id' => $link->id,
+//                'product_id' => $product_id
+//            ]);
+//            $linkProducts[] = $linkProduct->toArray();
+//        }
+//
+//        $array = $link->toArray();
+//        $array['link_product'] = $linkProducts;
+//        LinkCreated::dispatch($array)->onQueue('checkout_topic');
+//
+//        return $link;
+//    }
 
 //    public function show($code){ //already moved to another ms
 //        $link = Link::with( 'products')->where('code', $code)->first();
